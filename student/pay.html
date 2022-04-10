@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../img/student.png">
+    <title>支付学费</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+        }
+
+        body {
+            background-image: url("../img/IMG_1185.JPG");
+        }
+
+        div {
+            background-image: url("../img/IMG_1171.JPG");
+            background-repeat: no-repeat;
+            border: 0.5px solid rgb(210, 210, 215);
+            box-shadow: 0 1px 5px rgb(210, 210, 215);
+            border-radius: 15px;
+            width: 600px;
+            text-align: center;
+            margin: 0 auto;
+            margin-top: 100px;
+            padding: 20px;
+        }
+
+        div img {
+            border-radius: 16px;
+            height: auto;
+            width: 300px;
+            margin: 0 auto;
+
+        }
+
+        div span {
+            display: inline-block;
+            width: 80px;
+            text-align: left;
+            height: 40px;
+            line-height: 40px;
+        }
+
+        div input {
+            text-align: center;
+            vertical-align: middle;
+            border: 0.5px solid rgb(210, 210, 215);
+            border-radius: 5px;
+            display: inline-block;
+            height: 40px;
+            margin: 10px;
+            width: 300px;
+            padding: 5px;
+        }
+
+        div input:hover {
+            border: 0.5px solid rgb(91, 157, 223);
+            background-color: white;
+            border-radius: 6px;
+            transition: 0.5s;
+            -webkit-transition: 0, 5s;
+        }
+
+        div h1 {
+            font-size: 24px;
+            margin-bottom: 25px;
+        }
+
+        div h1 b {
+            display: inline-block;
+            width: 40px;
+        }
+
+        div #btn {
+            text-align: center;
+            vertical-align: middle;
+            width: 100px;
+            background-color: rgb(250, 250, 250);
+            height: 40px;
+        }
+
+        div #btn:hover {
+            border-radius: 10px;
+            height: 40px;
+            width: 220px;
+            border: 3px solid rgb(102, 177, 252);
+            color: whitesmoke;
+            background-color: rgb(0, 119, 237);
+            transition: 0.4s;
+            -webkit-transition: 0.4s;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <br>
+        <h1>支付宝扫码即可完成支付</h1>
+        <img src="../img/pay.png"></img><br><br>
+        <input type="button" id="btn" value="确认支付">
+    </div>
+
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>
+        $(function () {
+            var id = sessionStorage.getItem("student");
+            if (id == null) {
+                alert("请先登录");
+                location.href = "login.html";
+            }
+        });
+
+        $("#btn").click(function () {
+            var flag = window.confirm("确定已经扫码付款了吗？");
+            if (!flag) {
+                return;
+            }
+
+            // 获取
+            var id = sessionStorage.getItem("student");
+            var student = {
+                "studentId": id,
+                "isPay": 1
+            }
+
+            // 发送
+            $.ajax({
+                url: "http://localhost:8080/student",
+                contentType: "application/json;charset=utf-8",
+                type: "PUT",
+                data: JSON.stringify(student),
+                success: function () {
+                    alert("支付完成");
+                    location.href = "index.html";
+                }
+            })
+        });
+    </script>
+</body>
+
+</html>

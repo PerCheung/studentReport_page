@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../img/student.png">
+    <title>宿舍信息</title>
+
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table tr {
+            font-size: 16px;
+            margin: 10px;
+            text-align: center;
+        }
+
+        th {
+            height: 30px;
+        }
+
+        table tr td {
+            height: 30px;
+            border: 1px solid gray;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        #addbtn {
+            float: right;
+            background-color: rgb(0, 119, 237);
+            border: 3px outset rgb(91, 157, 223);
+            color: whitesmoke;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 12px;
+            margin-right: 8px;
+            margin-top: 12px;
+        }
+
+        #addbtn:hover {
+            border-radius: 10px;
+            background-color: #6536f4;
+            border: 3px outset rgb(93, 0, 255);
+            transition: 0.4s;
+            -webkit-transition: 0.4s;
+        }
+
+        #first {
+            font-weight: bold;
+            background-color: rgb(200, 200, 200);
+            border-collapse: collapse;
+        }
+
+        th {
+            padding-bottom: 4px;
+        }
+
+        #first th {
+            border: 1px solid gray;
+            padding-top: 5px;
+
+            color: black;
+        }
+
+        b {
+            display: inline-block;
+            width: 20px;
+        }
+
+
+        .sc {
+            background-color: rgb(0, 119, 237);
+            border: 3px outset rgb(91, 157, 223);
+            color: whitesmoke;
+            padding: 2px 18px;
+            font-size: 14px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            margin: 4px 2px;
+            border-radius: 15px;
+        }
+
+        .sc:hover {
+            border-radius: 10px;
+            background-color: #f44336;
+            border: 3px outset red;
+            transition: 0.4s;
+            -webkit-transition: 0.4s;
+        }
+
+        .xg {
+            background-color: rgb(0, 119, 237);
+            border: 3px outset rgb(91, 157, 223);
+            color: whitesmoke;
+            padding: 2px 18px;
+            font-size: 14px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            margin: 4px 2px;
+            border-radius: 15px;
+
+        }
+
+        .xg:hover {
+            border-radius: 10px;
+            background-color: #4CAF50;
+            border: 3px outset yellowgreen;
+            transition: 0.4s;
+            -webkit-transition: 0.4s;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>宿舍信息<button id="addbtn">增加宿舍</button></h1>
+    <hr>
+    <table>
+        <tr id="first">
+            <th>宿舍号</th>
+            <th>宿舍位置</th>
+            <th>操作</th>
+        </tr>
+    </table>
+
+
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>
+        $(function () {
+            var username = sessionStorage.getItem("admin");
+            if (username == null) {
+                alert("请先登录");
+                window.parent.location.href = "login.html";
+            } else if (username != null) {
+                $.ajax({
+                    async: false,
+                    url: "http://localhost:8080/dorm/all",
+                    type: "get",
+                    success: function (resp) {
+                        var dorms = resp.data;
+                        for (var dorm of dorms) {
+                            var tr = $("<tr></tr>");
+                            var td1 = $("<td>" + dorm.dormId + "</td>");
+                            var td2 = $("<td>" + dorm.dormLocation + "</td>");
+                            var td3 = $(
+                                "<td><button class='sc'>添加新生</button></td>"
+                            );
+
+                            tr.append(td1);
+                            tr.append(td2);
+                            tr.append(td3);
+
+                            $("table").append(tr);
+                        }
+                    }
+                });
+                
+                $(".sc").click(function () {
+                    // 兄弟元素
+                    var td = $(this).parent().prevAll().last();
+                    var id = td.html();
+                    sessionStorage.setItem("dormId",id);
+                    location.href = "ispaystudents.html";
+                });
+            }
+        });
+
+        $("#addbtn").click(function () {
+            location.href = "adddorm.html";
+        })
+    </script>
+</body>
+
+</html>

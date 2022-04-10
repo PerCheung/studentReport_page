@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../img/student.png">
+    <title>修改密码</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+        }
+
+        body {
+            background-image: url("../img/IMG_1185.JPG");
+        }
+
+        div {
+            background-image: url("../img/IMG_1171.JPG");
+            background-repeat: no-repeat;
+            border: 0.5px solid rgb(210, 210, 215);
+            box-shadow: 0 1px 5px rgb(210, 210, 215);
+            border-radius: 15px;
+            width: 600px;
+            text-align: center;
+            margin: 0 auto;
+            margin-top: 100px;
+            padding: 20px;
+        }
+
+        div span {
+            display: inline-block;
+            width: 80px;
+            text-align: left;
+            height: 40px;
+            line-height: 40px;
+        }
+
+        div input {
+            border: 0.5px solid rgb(210, 210, 215);
+            border-radius: 5px;
+            display: inline-block;
+            height: 40px;
+            margin: 10px;
+            width: 300px;
+            padding: 5px;
+        }
+
+        div input:hover {
+            border: 0.5px solid rgb(91, 157, 223);
+            background-color: white;
+            border-radius: 6px;
+            transition: 0.5s;
+            -webkit-transition: 0, 5s;
+        }
+
+        div h1 {
+            font-size: 24px;
+            margin-bottom: 25px;
+        }
+
+        div h1 b {
+            display: inline-block;
+            width: 40px;
+        }
+
+        div #btn {
+            width: 100px;
+            margin-left: 28px;
+            background-color: rgb(250, 250, 250);
+            height: 40px;
+        }
+
+        div #btn:hover {
+            border-radius: 10px;
+            height: 40px;
+            width: 220px;
+            margin-left: 28px;
+            border: 3px solid rgb(102, 177, 252);
+            color: whitesmoke;
+            background-color: rgb(0, 119, 237);
+            transition: 0.4s;
+            -webkit-transition: 0.4s;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <h1>修改密码</h1>
+        <span>新密码：</span><input type="password" id="newPasswd"><br>
+        <span>确认密码：</span><input type="password" id="newPasswd2"><br>
+        <input type="button" id="btn" value="修改密码">
+    </div>
+
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>
+        $(function () {
+            var id = sessionStorage.getItem("student");
+            if (id == null) {
+                alert("请先登录");
+                location.href = "login.html";
+            }
+        });
+
+        $("#btn").click(function () {
+            // 获取
+            var id = sessionStorage.getItem("student");
+            var newPasswd = $("#newPasswd").val();
+            var newPasswd2 = $("#newPasswd2").val();
+            var student = {
+                "studentId": id,
+                "studentPassword": newPasswd
+            }
+            // 校验
+            if (newPasswd != newPasswd2) {
+                alert("两次密码不一致");
+                return;
+            }
+
+            // 发送
+            $.ajax({
+                url: "http://localhost:8080/student",
+                contentType: "application/json;charset=utf-8",
+                type: "PUT",
+                data: JSON.stringify(student),
+                success: function (resp) {
+                    alert("密码更改成功，请重新登录，请牢记，新密码为：" + resp.studentPassword);
+                    logout();
+                }
+            })
+        });
+
+        function logout() {
+            sessionStorage.clear();
+            location.href = "login.html";
+        };
+    </script>
+</body>
+
+</html>

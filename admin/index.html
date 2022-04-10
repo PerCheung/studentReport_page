@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="../img/student.png">
+    <title>新生报道管理首页</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: white;
+        }
+
+        header {
+            height: 55px;
+            width: auto;
+            line-height: 60px;
+            background-color: rgb(49, 49, 50);
+            color: white;
+            padding: 20px;
+        }
+
+        header h1 {
+            float: left;
+        }
+
+        header p {
+            float: right;
+            margin-right: 20px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        header img {
+            float: right;
+            width: 50px;
+            height: 50px;
+            border-top-style: outset;
+            border-top-color: rgb(89, 34, 143);
+            border-right-style: inset;
+            border-right-color: rgba(82, 51, 153, 0.87);
+            border-bottom-style: outset;
+            border-bottom-color: rgba(105, 4, 206, 0.945);
+            border-left-style: inset;
+            border-left-color: rgb(65, 13, 207);
+            border-radius: 10px;
+            margin-right: 20px;
+        }
+
+        header img:hover {
+            margin-top: -5px;
+            margin-right: 15px;
+            width: 60px;
+            height: 60px;
+            transition: 0.1s;
+            -webkit-transition: 0.1s;
+        }
+
+        footer {
+            margin-bottom: 0;
+            clear: both;
+            padding: 10px;
+            text-align: center;
+            border-top: 0.5px solid rgb(210, 210, 215);
+            width: auto;
+            color: rgb(104, 101, 91);
+            background-color: white;
+
+        }
+
+        footer p {
+            display: inline;
+        }
+
+        .li a {
+            color: white;
+            padding-top: 60px;
+            padding: 30px;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        .li a:hover {
+            color: whitesmoke;
+            padding-top: 70px;
+            padding: 34px;
+            text-decoration: none;
+            font-size: 20px;
+        }
+
+        aside {
+            background-color: rgb(49, 49, 50);
+            float: left;
+            width: 14%;
+            /* border-right: 1% solid rgb(210, 210, 215); */
+            height: 593px;
+        }
+
+        aside ul li {
+            margin-top: 12px;
+            height: 40px;
+            line-height: 40px;
+            text-align: left;
+            color: white;
+        }
+
+        aside ul li a {
+            color: white;
+            padding-top: 60px;
+            padding: 20px;
+            text-decoration: none;
+            font-size: 22px;
+        }
+
+        aside ul li a:hover {
+            font-weight: bold;
+            color: white;
+            padding-top: 70px;
+            padding: 24px;
+            text-decoration: none;
+            font-size: 26px;
+        }
+
+        article {
+            background-color: white;
+            float: right;
+            width: 86%;
+            height: 593px;
+
+        }
+
+        article iframe {
+            color: rgb(240, 240, 240);
+            height: 593px;
+            width: 100%;
+            border: 0px;
+            margin: 0px;
+            padding: 0;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            z-index: 1;
+        }
+
+        .dropdown-content hr {
+            width: 105px;
+            margin-left: -20px;
+        }
+
+        .dropdown:hover .dropdown-content {
+            border-radius: 10px;
+            text-align: center;
+            display: block;
+            top: 38px;
+            left: 1000px;
+            background-color: rgb(37, 37, 38);
+            height: auto;
+            width: 85px;
+            box-shadow: 0px 5px 5px black;
+            margin-top: 20px;
+            padding: 0px 12px 0px 30px;
+        }
+
+        .xgTc {
+            color: white;
+        }
+
+        .xgTc:hover {
+            color: rgb(58, 137, 216);
+            font-weight: bold;
+        }
+
+        .li a {
+            color: white;
+            font-weight: normal;
+        }
+
+        .li a:hover {
+            color: white;
+            font-weight: bold;
+        }
+
+        #mainHS {
+            color: white;
+        }
+
+        #mainHS:hover {
+            font-size: 36px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1><a href="welcome.html" id="mainHS" target="main">新生报道管理</a></h1>
+        <p id="welcome">你好，</p>
+        <div class="dropdown">
+            <img src="../img/gaoda.png" class="img">
+            <div class="dropdown-content">
+                <p><a href="updatePasswd.html" class="xgTc" target="main">修改密码</a></p><br>
+                <hr>
+                <p><a id="logout" href="" class="xgTc">退出登录</a></p>
+            </div>
+        </div>
+    </header>
+
+
+    <aside>
+        <ul>
+            <li class="top"><a href="students.html" target="main">学生管理</a></li>
+            <li class="top"><a href="dorms.html" target="main">宿舍管理</a></li>
+            <li class="top"><a href="colleges.html" target="main">学院管理</a></li>
+            <li class="top"><a href="classes.html" target="main">班级管理</a></li>
+        </ul>
+    </aside>
+
+
+    <article>
+        <iframe name="main" src="welcome.html"></iframe>
+    </article>
+
+
+    <footer>
+        <p>Copyright © 2000-2021 SYZ s.r.o.</p>
+        <p>版权归孙瑜泽所有</p>
+    </footer>
+
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>
+        $(function () {
+            var username = sessionStorage.getItem("admin");
+            if (username == null) {
+                location.href = "login.html";
+            }
+
+            $("#welcome").html("你好，" + username);
+        });
+
+        $("#logout").click(function () {
+            sessionStorage.clear();
+            location.href = "login.html";
+        })
+    </script>
+</body>
+
+</html>
